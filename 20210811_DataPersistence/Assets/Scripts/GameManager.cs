@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void SaveData()
     {
         string json = JsonUtility.ToJson(myData);                     //SaveData 인스턴스를 JSON 으로 변환
-
+        Debug.Log(json);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
         // Application.persistentDataPath  - Unity 메서드를 사용하여 애플리케이션 재설치 또는 업데이트 사이에 유지되는 데이터를 저장할 수 있는 폴더를 반환
 
@@ -76,11 +76,11 @@ public class GameManager : MonoBehaviour
         string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))                      // .json 파일이 있는지 확인
         {
+            Debug.Log(path);
             string json = File.ReadAllText(path);   //내용 읽기
             myData = JsonUtility.FromJson<Data>(json);   //JSON 에서 SaveData 인스턴스로 변환
             topRangkingName = myData.myData_Dic.First().Key;
             topRangkingPoint = myData.myData_Dic.First().Value;
-            Debug.Log("LoadData() 불러옴");
         }
     }
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         if (File.Exists(path))                      // .json 파일이 있는지 확인
         {
             File.Delete(path);
-            Debug.Log("삭제");
+            myData.myData_Dic.Clear();
         }
 
     }

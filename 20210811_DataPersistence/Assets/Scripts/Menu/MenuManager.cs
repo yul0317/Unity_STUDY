@@ -11,6 +11,7 @@ using UnityEditor;
 
 public class MenuManager : MonoBehaviour
 {
+    public Text bestScoreText;
     public InputField userName;
     public Button startButton;
     public Button quitButton;
@@ -28,7 +29,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        //if(GameManager.Instance.my)
+        bestScoreText.text = "Best Score - " + GameManager.Instance.topRangkingName + " : " + GameManager.Instance.topRangkingPoint;
     }
     void StartGame()
     {

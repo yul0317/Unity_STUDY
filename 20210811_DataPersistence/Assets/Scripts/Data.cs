@@ -25,7 +25,11 @@ class Data : ISerializationCallbackReceiver
         {
             myData_Dic.Add(name, point);
         }
-        myData_Dic = myData_Dic.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        myData_Dic = myData_Dic.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        foreach (var x in myData_Dic)
+        {
+            Debug.Log(x.Key + " : " + x.Value);
+        }
         //! 딕셔너리를.. OrderBy(확장메서드) 하며 람다식을 통하여 IEnumerable 모르겠다...
         //! 누가 속시원히 설명좀...}
 
