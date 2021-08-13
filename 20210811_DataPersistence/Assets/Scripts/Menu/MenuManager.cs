@@ -14,20 +14,29 @@ public class MenuManager : MonoBehaviour
     public InputField userName;
     public Button startButton;
     public Button quitButton;
+    public Button rangkingButton;
+    public Button deleteButton;
 
     private void Awake()
     {
+
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(EndGame);
+        rangkingButton.onClick.AddListener(ShowRangking);
+        deleteButton.onClick.AddListener(DeleteDic);
     }
 
+    private void Start()
+    {
+        //if(GameManager.Instance.my)
+    }
     void StartGame()
     {
         if (userName != null)
         {
-            GameManager.Instance.userName = userName.text;
+            GameManager.Instance.UserUpdate(userName.text);
+            SceneManager.LoadScene(1);
         }
-        SceneManager.LoadScene(1);
     }
 
     void EndGame()
@@ -39,5 +48,16 @@ public class MenuManager : MonoBehaviour
         Application.Quit(); // original code to quit Unity player
 #endif
 
+    }
+
+
+    void ShowRangking()
+    {
+        Debug.Log("랭킹표시하자");
+    }
+
+    void DeleteDic()
+    {
+        GameManager.Instance.DeleteData();
     }
 }
