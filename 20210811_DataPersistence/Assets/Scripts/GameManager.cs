@@ -95,5 +95,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public Dictionary<string, int> ShowDataRangking()
+    {
+        return myData.myData_Dic;
+    }
 
 }

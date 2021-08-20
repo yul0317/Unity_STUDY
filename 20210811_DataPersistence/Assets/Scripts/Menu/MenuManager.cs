@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,14 +18,21 @@ public class MenuManager : MonoBehaviour
     public Button quitButton;
     public Button rangkingButton;
     public Button deleteButton;
+    public GameObject scrollView;
+    public Text[] rangkingText;
+
 
     private void Awake()
     {
-
+        scrollView.SetActive(false);
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(EndGame);
         rangkingButton.onClick.AddListener(ShowRangking);
         deleteButton.onClick.AddListener(DeleteDic);
+        foreach (var x in rangkingText)
+        {
+            x.text = "";
+        }
     }
 
     private void Start()
@@ -54,7 +62,23 @@ public class MenuManager : MonoBehaviour
 
     void ShowRangking()
     {
-        Debug.Log("랭킹표시하자");
+        if (!scrollView.activeSelf)
+        {
+            scrollView.SetActive(true);
+            var x = GameManager.Instance.ShowDataRangking();
+            int i = 0;
+            foreach (var target in x)
+            {
+                rangkingText[i].text = (i + 1) + "위 - " + target.Key + " : " + target.Value + "점";
+                i++;
+                if (i == 10) break;
+            }
+        }
+        else
+        {
+            scrollView.SetActive(false);
+        }
+
     }
 
     void DeleteDic()
